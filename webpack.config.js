@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const resolve = dir => path.resolve(__dirname, dir);
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const tsImportPluginFactory = require('ts-import-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -27,7 +28,11 @@ module.exports = (env) => {
             quiet: true
         },
         resolve: {
-            extensions: ['.ts', '.tsx', '.js', '.jsx']
+            extensions: ['.ts', '.tsx', '.js', '.jsx'],
+            // 设置别名
+            alias: {
+                '@': resolve('src')// 这样配置后 @ 可以指向 src 目录
+            }
         },
         module: {
             rules: [
@@ -65,6 +70,10 @@ module.exports = (env) => {
                     },
                     exclude: /node_modules/
                 },
+                {
+                    test: /\.(png|jpg|gif|mp4|ogg|svg|woff|woff2|ttf|eot|glb|obj|gltf|hdr)$/,
+                    loader: 'file-loader'
+                 },
                 {
                     test: /\.ts[x]?$/,
                     // 支持typescript按需加载antd

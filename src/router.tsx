@@ -3,6 +3,7 @@ import { HashRouter, Switch, Route } from 'react-router-dom';
 
 import Home from './containers/Home';
 import NoMatch from './containers/NoMatch';
+import Test from './containers/Test';
 
 export interface child {
     path?: string,
@@ -14,6 +15,10 @@ const Router = () => {
         {
             path: '/',
             com: Home
+        },
+        {
+            path: '/test',
+            com: Test
         },
         {
             com: NoMatch
